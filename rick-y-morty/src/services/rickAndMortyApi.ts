@@ -53,16 +53,15 @@ export const searchCharacters = async (filters: SearchFilters = {}): Promise<Cha
 
         if (!response.ok) {
             if (response.status === 404) {
-                throw new ApiError('No characters found with those criteria.', 404)
+                return {
+                    info: { count: 0, pages: 0, next: null, prev: null },
+                    results: [],
+                }
             }
             throw new ApiError(`Error ${response.status}: Unable to query the API.`, response.status)
         }
 
         const data = (await response.json()) as CharactersResponse
-        if (!data.results?.length) {
-            throw new ApiError('No characters found.', 404)
-        }
-
         return data
     } catch (error) {
         if (error instanceof ApiError) {

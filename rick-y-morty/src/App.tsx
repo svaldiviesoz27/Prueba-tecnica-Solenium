@@ -98,7 +98,15 @@ function App() {
     setFilters((prev) => ({ ...prev, page: 1 }))
   }, [fetchCharacters, buildFilters])
 
-  const showResults = useMemo(() => !isLoading && !error && data !== null, [isLoading, error, data])
+  const noResults = useMemo(
+    () => !isLoading && !error && data !== null && data.results.length === 0,
+    [isLoading, error, data]
+  )
+
+  const showResults = useMemo(
+    () => !isLoading && !error && data !== null && data.results.length > 0,
+    [isLoading, error, data]
+  )
 
   return (
     <div className="app">
@@ -144,6 +152,12 @@ function App() {
         {isLoading && <SkeletonGrid />}
         
         {error && <ErrorMessage message={error} />}
+
+        {noResults && (
+          <div className="empty-state" role="status">
+            No se encontraron resultados con esos criterios.
+          </div>
+        )}
 
         {showResults && data && (
           <>
