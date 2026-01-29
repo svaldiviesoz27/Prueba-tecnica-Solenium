@@ -26,7 +26,7 @@ Esta aplicación fue desarrollada como prueba técnica para demostrar habilidade
 
 1. **Clonar el repositorio**
 ```bash
-git clone <url-del-repositorio>
+git clone [<(https://github.com/svaldiviesoz27/Prueba-tecnica-Solenium)>]
 cd rick-y-morty
 ```
 
