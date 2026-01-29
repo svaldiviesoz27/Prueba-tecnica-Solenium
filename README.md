@@ -21,7 +21,7 @@ El desarrollo se enfocó en:
 ## Stack tecnológico
 
 **Frontend:**
-- React 18
+- React 19
 - TypeScript
 - Vite
 
