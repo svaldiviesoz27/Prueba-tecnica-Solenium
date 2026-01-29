@@ -1,73 +1,186 @@
-# React + TypeScript + Vite
+# 🚀 Rick & Morty - Buscador de Personajes
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+Aplicación web desarrollada en React que permite buscar y explorar personajes de la serie Rick & Morty utilizando la [Rick and Morty API](https://rickandmortyapi.com/).
 
-Currently, two official plugins are available:
+## 📋 Descripción del Proyecto
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) (or [oxc](https://oxc.rs) when used in [rolldown-vite](https://vite.dev/guide/rolldown)) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+Esta aplicación fue desarrollada como prueba técnica para demostrar conocimientos en desarrollo frontend con React. Permite a los usuarios buscar personajes, aplicar filtros avanzados, navegar entre resultados paginados y ver información detallada de cada personaje.
 
-## React Compiler
+## ✨ Características
 
-The React Compiler is currently not compatible with SWC. See [this issue](https://github.com/vitejs/vite-plugin-react/issues/428) for tracking the progress.
+- **🔍 Búsqueda de personajes** por nombre
+- **🎯 Filtros avanzados** por estado (vivo/muerto/desconocido), especie y género
+- **📄 Paginación completa** para navegar entre múltiples resultados
+- **🎨 Vista de detalle** con modal interactivo
+- **📱 Diseño responsive** adaptado a todos los dispositivos
+- **💾 Historial de búsquedas** guardado en localStorage
+- **⚡ Loader animado** durante las consultas
+- **❌ Manejo de errores** con mensajes claros
+- **♿ Accesibilidad** con etiquetas ARIA y navegación por teclado
 
-## Expanding the ESLint configuration
+## 🛠️ Tecnologías Utilizadas
 
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
+- **React 19** - Biblioteca de JavaScript para interfaces de usuario
+- **TypeScript** - Superset tipado de JavaScript
+- **Vite** - Build tool y dev server ultrarrápido
+- **CSS3** - Estilos modernos con animaciones y transiciones
+- **Rick and Morty API** - API REST pública
+- **ESLint** - Linter para mantener código limpio
 
-```js
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
+## 📦 Instalación y Ejecución
 
-      // Remove tseslint.configs.recommended and replace with this
-      tseslint.configs.recommendedTypeChecked,
-      // Alternatively, use this for stricter rules
-      tseslint.configs.strictTypeChecked,
-      // Optionally, add this for stylistic rules
-      tseslint.configs.stylisticTypeChecked,
+### Prerrequisitos
 
-      // Other configs...
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
+- Node.js (versión 18 o superior)
+- npm o yarn
+
+### Pasos para ejecutar el proyecto
+
+1. **Clonar el repositorio**
+```bash
+git clone <url-del-repositorio>
+cd rick-y-morty
 ```
 
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
-
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
-
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-      // Enable lint rules for React
-      reactX.configs['recommended-typescript'],
-      // Enable lint rules for React DOM
-      reactDom.configs.recommended,
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
+2. **Instalar dependencias**
+```bash
+npm install
 ```
+
+3. **Ejecutar en modo desarrollo**
+```bash
+npm run dev
+```
+
+4. **Abrir en el navegador**
+```
+http://localhost:5173
+```
+
+### Otros comandos disponibles
+
+```bash
+# Compilar para producción
+npm run build
+
+# Previsualizar build de producción
+npm run preview
+
+# Ejecutar linter
+npm run lint
+```
+
+## 🎯 Funcionalidades Implementadas
+
+### HU01 - Búsqueda de personajes ✅
+- Campo de texto para ingresar nombre del personaje
+- Botón de búsqueda con validación
+- Loader animado durante la consulta
+- Mensajes de error claros
+- Manejo robusto de errores de API
+
+### HU02 - Visualización de información ✅
+- Grid de resultados con cards interactivas
+- Modal de detalle con información completa:
+  - Nombre
+  - Imagen
+  - Especie y tipo
+  - Estado (con indicador visual de color)
+  - Género
+  - Origen
+  - Última ubicación conocida
+  - Número de episodios
+
+### HU03 - Historial de búsquedas ✅
+- Últimas 3 búsquedas guardadas
+- Persistencia en localStorage
+- Click para repetir búsqueda rápidamente
+- Se actualiza automáticamente
+
+### HU04 - Diseño y usabilidad ✅
+- Diseño completamente responsive
+- Interfaz moderna y limpia
+- Animaciones suaves y transiciones
+- Paleta de colores profesional
+- Experiencia de usuario intuitiva
+
+## 🎨 Características Adicionales
+
+- **Filtros avanzados**: Estado, especie y género
+- **Paginación inteligente**: Navegación entre páginas con indicadores
+- **Información de resultados**: Contador de personajes y páginas
+- **Modal interactivo**: Vista detallada con cierre por ESC o click fuera
+- **Badges de estado**: Indicadores visuales con colores (verde=vivo, rojo=muerto, gris=desconocido)
+- **Efectos hover**: Animaciones en cards y botones
+- **Optimización de búsquedas**: Los filtros se aplican automáticamente
+
+## 📁 Estructura del Proyecto
+
+```
+src/
+├── components/
+│   ├── CharacterGrid.tsx      # Grid de personajes
+│   ├── CharacterModal.tsx     # Modal de detalle
+│   ├── ErrorMessage.tsx       # Mensajes de error
+│   ├── Filters.tsx            # Filtros avanzados
+│   ├── Loader.tsx             # Indicador de carga
+│   ├── Pagination.tsx         # Navegación de páginas
+│   ├── ResultsInfo.tsx        # Información de resultados
+│   ├── SearchBar.tsx          # Barra de búsqueda
+│   └── SearchHistory.tsx      # Historial de búsquedas
+├── services/
+│   └── rickAndMortyApi.ts     # Servicio de API
+├── types/
+│   └── rickAndMorty.ts        # Tipos TypeScript
+├── App.tsx                     # Componente principal
+├── App.css                     # Estilos principales
+├── main.tsx                    # Punto de entrada
+└── index.css                   # Estilos globales
+```
+
+## 🌐 API Utilizada
+
+**Rick and Morty API**
+- Documentación: https://rickandmortyapi.com/documentation
+- Endpoint base: `https://rickandmortyapi.com/api`
+- Recursos utilizados: `/character` con filtros y paginación
+
+## 👨‍💻 Buenas Prácticas Implementadas
+
+- ✅ Componentes funcionales con hooks
+- ✅ TypeScript para tipado estático
+- ✅ Separación de responsabilidades
+- ✅ Manejo de errores robusto
+- ✅ Código limpio y legible
+- ✅ Nombres descriptivos
+- ✅ Accesibilidad (ARIA labels)
+- ✅ Responsive design
+- ✅ Optimización de renders
+- ✅ Validación de inputs
+
+## 📝 Notas de Desarrollo
+
+- Se utilizó Vite por su velocidad y configuración mínima
+- TypeScript para mayor seguridad y autocompletado
+- CSS puro sin frameworks para demostrar conocimientos fundamentales
+- Componentes reutilizables y modulares
+- Estado local con hooks de React (useState, useEffect)
+- LocalStorage para persistencia del historial
+
+## 🚀 Mejoras Futuras Posibles
+
+- Implementar React Query para caché de datos
+- Agregar tests unitarios y de integración
+- Modo oscuro
+- Búsqueda con debounce automático
+- Favoritos persistentes
+- Compartir personajes en redes sociales
+- Filtros por episodio y ubicación
+
+## 📄 Licencia
+
+Este proyecto fue desarrollado como prueba técnica y es de uso libre para fines educativos.
+
+---
+
+Desarrollado con ❤️ usando React y TypeScript

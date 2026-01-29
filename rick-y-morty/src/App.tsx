@@ -1,88 +1,117 @@
-import { useEffect, useState } from 'react'
+import { useEffect, useState, useCallback, useMemo } from 'react'
 import './App.css'
 import { SearchBar } from './components/searchBar'
-import { Loader } from './components/Loader'
 import { ErrorMessage } from './components/ErrorMessage'
 import { SearchHistory } from './components/SearchHistory'
-import { CharacterCard } from './components/CharacterCard'
-import { ApiError, fetchCharacterByName } from './services/rickAndMortyApi'
+import { CharacterGrid } from './components/CharacterGrid'
+import { CharacterModal } from './components/CharacterModal'
+import { Filters } from './components/Filters'
+import { Pagination } from './components/Pagination'
+import { ResultsInfo } from './components/ResultsInfo'
+import { SkeletonGrid } from './components/SkeletonCard'
+import { ThemeToggle } from './components/ThemeToggle'
+import { useCharacters } from './hooks/useCharacters'
+import { useSearchHistory } from './hooks/useSearchHistory'
+import { useDarkMode } from './hooks/useDarkMode'
 import type { Character } from './types/rickAndMorty'
-
-const HISTORY_STORAGE_KEY = 'rick-morty-search-history'
-const MAX_HISTORY_ITEMS = 3
 
 function App() {
   const [searchTerm, setSearchTerm] = useState('')
-  const [character, setCharacter] = useState<Character | null>(null)
-  const [isLoading, setIsLoading] = useState(false)
-  const [errorMessage, setErrorMessage] = useState('')
-  const [history, setHistory] = useState<string[]>([])
+  const [filters, setFilters] = useState({
+    status: 'all',
+    species: 'all',
+    gender: 'all',
+    page: 1,
+  })
+  const [selectedCharacter, setSelectedCharacter] = useState<Character | null>(null)
 
+  const { data, isLoading, error, fetchCharacters } = useCharacters()
+  const { history, addToHistory, clearHistory } = useSearchHistory()
+  const { isDark, toggle: toggleTheme } = useDarkMode()
+
+  // Initial load
   useEffect(() => {
-    const savedHistory = localStorage.getItem(HISTORY_STORAGE_KEY)
-    if (savedHistory) {
-      setHistory(JSON.parse(savedHistory))
-    }
-  }, [])
+    fetchCharacters({ page: 1 })
+  }, [fetchCharacters])
 
-  useEffect(() => {
-    localStorage.setItem(HISTORY_STORAGE_KEY, JSON.stringify(history))
-  }, [history])
+  const buildFilters = useCallback((name?: string, page: number = 1) => ({
+    name: name || undefined,
+    status: filters.status !== 'all' ? filters.status : undefined,
+    species: filters.species !== 'all' ? filters.species : undefined,
+    gender: filters.gender !== 'all' ? filters.gender : undefined,
+    page,
+  }), [filters.status, filters.species, filters.gender])
 
-  const updateHistory = (name: string) => {
-    const trimmedName = name.trim()
-    if (!trimmedName) {
-      return
-    }
+  const handleSearch = useCallback(() => {
+    const trimmed = searchTerm.trim()
+    if (!trimmed) return
 
-    setHistory((previous) => {
-      const filtered = previous.filter(
-        (item) => item.toLowerCase() !== trimmedName.toLowerCase()
-      )
-      return [trimmedName, ...filtered].slice(0, MAX_HISTORY_ITEMS)
-    })
-  }
+    addToHistory(trimmed)
+    const searchFilters = buildFilters(trimmed, 1)
+    fetchCharacters(searchFilters)
+    setFilters((prev) => ({ ...prev, page: 1 }))
+  }, [searchTerm, addToHistory, fetchCharacters, buildFilters])
 
-  const handleSearchByName = async (name: string) => {
-    if (!name.trim()) {
-      setErrorMessage('Ingresa un nombre para buscar.')
-      return
-    }
-
-    setIsLoading(true)
-    setErrorMessage('')
-    setCharacter(null)
-
-    try {
-      const result = await fetchCharacterByName(name)
-      setCharacter(result)
-      updateHistory(result.name)
-    } catch (error) {
-      if (error instanceof ApiError) {
-        setErrorMessage(error.message)
-      } else {
-        setErrorMessage('Ocurrió un error inesperado. Intenta nuevamente.')
+  const handleFilterChange = useCallback((key: string, value: string) => {
+    setFilters((prev) => {
+      const newFilters = { ...prev, [key]: value, page: 1 }
+      
+      // Build filters with the NEW values
+      const apiFilters = {
+        name: searchTerm || undefined,
+        status: key === 'status' ? (value !== 'all' ? value : undefined) : (newFilters.status !== 'all' ? newFilters.status : undefined),
+        species: key === 'species' ? (value !== 'all' ? value : undefined) : (newFilters.species !== 'all' ? newFilters.species : undefined),
+        gender: key === 'gender' ? (value !== 'all' ? value : undefined) : (newFilters.gender !== 'all' ? newFilters.gender : undefined),
+        page: 1,
       }
-    } finally {
-      setIsLoading(false)
-    }
-  }
+      
+      fetchCharacters(apiFilters)
+      return newFilters
+    })
+  }, [searchTerm, fetchCharacters])
 
-  const handleSearch = () => {
-    void handleSearchByName(searchTerm)
-  }
+  const handleResetFilters = useCallback(() => {
+    setFilters({ status: 'all', species: 'all', gender: 'all', page: 1 })
+    fetchCharacters({ name: searchTerm || undefined, page: 1 })
+  }, [searchTerm, fetchCharacters])
 
-  const handleSelectHistory = (name: string) => {
+  const handleClearSearch = useCallback(() => {
+    setSearchTerm('')
+    fetchCharacters({ 
+      status: filters.status !== 'all' ? filters.status : undefined,
+      species: filters.species !== 'all' ? filters.species : undefined,
+      gender: filters.gender !== 'all' ? filters.gender : undefined,
+      page: 1 
+    })
+    setFilters((prev) => ({ ...prev, page: 1 }))
+  }, [filters.status, filters.species, filters.gender, fetchCharacters])
+
+  const handlePageChange = useCallback((page: number) => {
+    setFilters((prev) => ({ ...prev, page }))
+    fetchCharacters(buildFilters(searchTerm || undefined, page))
+    window.scrollTo({ top: 0, behavior: 'smooth' })
+  }, [searchTerm, fetchCharacters, buildFilters])
+
+  const handleSelectHistory = useCallback((name: string) => {
     setSearchTerm(name)
-    void handleSearchByName(name)
-  }
+    fetchCharacters(buildFilters(name, 1))
+    setFilters((prev) => ({ ...prev, page: 1 }))
+  }, [fetchCharacters, buildFilters])
+
+  const showResults = useMemo(() => !isLoading && !error && data !== null, [isLoading, error, data])
 
   return (
     <div className="app">
       <header className="app__header">
-        <span className="app__badge">Rick & Morty</span>
-        <h1>Buscador de personajes</h1>
-        <p>Encuentra información de tus personajes favoritos.</p>
+        <div className="app__header-top">
+          <img 
+            src="https://upload.wikimedia.org/wikipedia/commons/b/b1/Rick_and_Morty.svg" 
+            alt="Rick and Morty Logo" 
+            className="app__logo"
+          />
+          <ThemeToggle isDark={isDark} onToggle={toggleTheme} />
+        </div>
+        <p>Explore the Rick & Morty universe</p>
       </header>
 
       <main className="app__content">
@@ -90,18 +119,58 @@ function App() {
           value={searchTerm}
           onChange={setSearchTerm}
           onSearch={handleSearch}
+          onClear={handleClearSearch}
           isLoading={isLoading}
         />
 
-        {isLoading && <Loader />}
-        {errorMessage && <ErrorMessage message={errorMessage} />}
+        <Filters
+          status={filters.status}
+          species={filters.species}
+          gender={filters.gender}
+          onStatusChange={(value) => handleFilterChange('status', value)}
+          onSpeciesChange={(value) => handleFilterChange('species', value)}
+          onGenderChange={(value) => handleFilterChange('gender', value)}
+          onReset={handleResetFilters}
+        />
 
-        {!isLoading && !errorMessage && character && (
-          <CharacterCard character={character} />
+        {history.length > 0 && (
+          <SearchHistory 
+            items={history} 
+            onSelect={handleSelectHistory}
+            onClear={clearHistory}
+          />
         )}
 
-        <SearchHistory items={history} onSelect={handleSelectHistory} />
+        {isLoading && <SkeletonGrid />}
+        
+        {error && <ErrorMessage message={error} />}
+
+        {showResults && data && (
+          <>
+            <ResultsInfo
+              total={data.info.count}
+              currentPage={filters.page}
+              totalPages={data.info.pages}
+              resultsPerPage={20}
+            />
+            <CharacterGrid
+              characters={data.results}
+              onSelectCharacter={setSelectedCharacter}
+            />
+            {data.info.pages > 1 && (
+              <Pagination
+                currentPage={filters.page}
+                totalPages={data.info.pages}
+                onPageChange={handlePageChange}
+              />
+            )}
+          </>
+        )}
       </main>
+
+      {selectedCharacter && (
+        <CharacterModal character={selectedCharacter} onClose={() => setSelectedCharacter(null)} />
+      )}
     </div>
   )
 }
