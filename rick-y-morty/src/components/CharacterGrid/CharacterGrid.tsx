@@ -1,6 +1,6 @@
-import type { Character } from '../types/rickAndMorty'
-import { getStatusColor, getStatusText } from '../utils/statusHelpers'
-import { LazyImage } from './LazyImage'
+import type { Character } from '../../types/rickAndMorty'
+import { getStatusColor, getStatusText } from '../../utils/statusHelpers'
+import { LazyImage } from '../LazyImage/LazyImage'
 
 interface CharacterGridProps {
     characters: Character[]

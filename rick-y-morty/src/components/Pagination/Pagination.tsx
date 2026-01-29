@@ -1,4 +1,4 @@
-import { ChevronLeftIcon, ChevronRightIcon } from './Icons'
+import { ChevronLeftIcon, ChevronRightIcon } from '../Icons/Icons'
 
 interface PaginationProps {
     currentPage: number

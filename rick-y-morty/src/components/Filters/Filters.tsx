@@ -1,6 +1,6 @@
-import { STATUS_OPTIONS, SPECIES_OPTIONS, GENDER_OPTIONS } from '../constants/filters'
-import { FilterIcon, XIcon } from './Icons'
-import { CustomSelect } from './CustomSelect'
+import { STATUS_OPTIONS, SPECIES_OPTIONS, GENDER_OPTIONS } from '../../constants/filters'
+import { FilterIcon, XIcon } from '../Icons/Icons'
+import { CustomSelect } from '../CustomSelect/CustomSelect'
 
 interface FiltersProps {
     status: string

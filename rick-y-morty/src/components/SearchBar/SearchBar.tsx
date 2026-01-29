@@ -1,5 +1,5 @@
 import type { FormEvent } from 'react'
-import { SearchIcon, XIcon } from './Icons'
+import { SearchIcon, XIcon } from '../Icons/Icons'
 
 interface SearchBarProps {
     value: string

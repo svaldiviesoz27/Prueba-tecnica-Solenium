@@ -1,8 +1,7 @@
 import { useEffect } from 'react'
-import type { Character } from '../types/rickAndMorty'
-import { getStatusColor, getStatusText } from '../utils/statusHelpers'
-
-import { XIcon } from './Icons'
+import type { Character } from '../../types/rickAndMorty'
+import { getStatusColor, getStatusText } from '../../utils/statusHelpers'
+import { XIcon } from '../Icons/Icons'
 
 interface CharacterModalProps {
     character: Character

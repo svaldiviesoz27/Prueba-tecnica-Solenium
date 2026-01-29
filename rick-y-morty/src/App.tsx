@@ -1,6 +1,6 @@
 import { useEffect, useState, useCallback, useMemo } from 'react'
 import './App.css'
-import { SearchBar } from './components/searchBar'
+import { SearchBar } from './components/SearchBar'
 import { ErrorMessage } from './components/ErrorMessage'
 import { SearchHistory } from './components/SearchHistory'
 import { CharacterGrid } from './components/CharacterGrid'

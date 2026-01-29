@@ -1,40 +1,28 @@
-# 🚀 Rick & Morty - Buscador de Personajes
+# Rick & Morty - Explorador de Personajes
 
-Aplicación web desarrollada en React que permite buscar y explorar personajes de la serie Rick & Morty utilizando la [Rick and Morty API](https://rickandmortyapi.com/).
+Aplicación web moderna desarrollada con React que permite buscar y explorar personajes de la serie Rick & Morty utilizando la [Rick and Morty API](https://rickandmortyapi.com/).
 
-## 📋 Descripción del Proyecto
+## Descripción del Proyecto
 
-Esta aplicación fue desarrollada como prueba técnica para demostrar conocimientos en desarrollo frontend con React. Permite a los usuarios buscar personajes, aplicar filtros avanzados, navegar entre resultados paginados y ver información detallada de cada personaje.
+Esta aplicación fue desarrollada como prueba técnica para demostrar habilidades en desarrollo frontend con React. Proporciona una experiencia completa de navegación de personajes con filtrado avanzado, paginación, vistas detalladas de personajes y una interfaz limpia y responsive con soporte para modo oscuro.
 
-## ✨ Características
+## Tecnologías Utilizadas
 
-- **🔍 Búsqueda de personajes** por nombre
-- **🎯 Filtros avanzados** por estado (vivo/muerto/desconocido), especie y género
-- **📄 Paginación completa** para navegar entre múltiples resultados
-- **🎨 Vista de detalle** con modal interactivo
-- **📱 Diseño responsive** adaptado a todos los dispositivos
-- **💾 Historial de búsquedas** guardado en localStorage
-- **⚡ Loader animado** durante las consultas
-- **❌ Manejo de errores** con mensajes claros
-- **♿ Accesibilidad** con etiquetas ARIA y navegación por teclado
+- **React 19** - Biblioteca de JavaScript para construir interfaces de usuario
+- **TypeScript** - Superset tipado de JavaScript para mejor calidad de código
+- **Vite** - Herramienta de build y servidor de desarrollo ultrarrápido
+- **CSS3** - Estilos modernos con custom properties, animaciones y transiciones
+- **Rick and Morty API** - API REST pública para datos de personajes
+- **ESLint** - Linter para mantener la calidad del código
 
-## 🛠️ Tecnologías Utilizadas
-
-- **React 19** - Biblioteca de JavaScript para interfaces de usuario
-- **TypeScript** - Superset tipado de JavaScript
-- **Vite** - Build tool y dev server ultrarrápido
-- **CSS3** - Estilos modernos con animaciones y transiciones
-- **Rick and Morty API** - API REST pública
-- **ESLint** - Linter para mantener código limpio
-
-## 📦 Instalación y Ejecución
+## Instalación y Configuración
 
 ### Prerrequisitos
 
 - Node.js (versión 18 o superior)
-- npm o yarn
+- npm o yarn como gestor de paquetes
 
-### Pasos para ejecutar el proyecto
+### Pasos para Ejecutar el Proyecto
 
 1. **Clonar el repositorio**
 ```bash
@@ -57,7 +45,9 @@ npm run dev
 http://localhost:5173
 ```
 
-### Otros comandos disponibles
+La aplicación se recargará automáticamente cuando realices cambios en el código.
+
+### Comandos Adicionales
 
 ```bash
 # Compilar para producción
@@ -70,117 +60,124 @@ npm run preview
 npm run lint
 ```
 
-## 🎯 Funcionalidades Implementadas
+## Características
 
-### HU01 - Búsqueda de personajes ✅
+- **Búsqueda de Personajes** - Busca personajes por nombre con resultados en tiempo real
+- **Filtros Avanzados** - Filtra por estado (vivo/muerto/desconocido), especie y género con dropdowns buscables
+- **Paginación** - Navega a través de múltiples páginas de resultados con controles inteligentes
+- **Detalles de Personajes** - Visualiza información detallada en un modal interactivo
+- **Modo Oscuro** - Alterna entre temas claro y oscuro con persistencia en localStorage
+- **Historial de Búsquedas** - Acceso rápido a tus últimas 3 búsquedas
+- **Diseño Responsive** - Layout completamente responsive que funciona en todos los dispositivos
+- **Estados de Carga** - Skeleton loaders para mejor experiencia de usuario
+- **Manejo de Errores** - Mensajes de error claros para fallos de API
+- **Accesibilidad** - Etiquetas ARIA y soporte para navegación por teclado
+
+## Requerimientos Implementados
+
+### HU01 - Búsqueda de Personajes ✅
 - Campo de texto para ingresar nombre del personaje
 - Botón de búsqueda con validación
-- Loader animado durante la consulta
+- Loader animado durante las llamadas a la API
 - Mensajes de error claros
 - Manejo robusto de errores de API
 
-### HU02 - Visualización de información ✅
-- Grid de resultados con cards interactivas
-- Modal de detalle con información completa:
-  - Nombre
-  - Imagen
+### HU02 - Visualización de Información ✅
+- Grid interactivo de personajes con cards
+- Vista detallada en modal mostrando:
+  - Nombre e imagen
   - Especie y tipo
-  - Estado (con indicador visual de color)
+  - Estado con indicadores de color
   - Género
   - Origen
   - Última ubicación conocida
-  - Número de episodios
+  - Número de apariciones en episodios
 
-### HU03 - Historial de búsquedas ✅
+### HU03 - Historial de Búsquedas ✅
 - Últimas 3 búsquedas guardadas
 - Persistencia en localStorage
-- Click para repetir búsqueda rápidamente
-- Se actualiza automáticamente
+- Re-búsqueda rápida haciendo clic en el historial
+- Opción para limpiar historial
 
-### HU04 - Diseño y usabilidad ✅
+### HU04 - Diseño y Usabilidad ✅
 - Diseño completamente responsive
-- Interfaz moderna y limpia
-- Animaciones suaves y transiciones
+- Interfaz limpia y moderna
+- Animaciones y transiciones suaves
 - Paleta de colores profesional
 - Experiencia de usuario intuitiva
 
-## 🎨 Características Adicionales
-
-- **Filtros avanzados**: Estado, especie y género
-- **Paginación inteligente**: Navegación entre páginas con indicadores
-- **Información de resultados**: Contador de personajes y páginas
-- **Modal interactivo**: Vista detallada con cierre por ESC o click fuera
-- **Badges de estado**: Indicadores visuales con colores (verde=vivo, rojo=muerto, gris=desconocido)
-- **Efectos hover**: Animaciones en cards y botones
-- **Optimización de búsquedas**: Los filtros se aplican automáticamente
-
-## 📁 Estructura del Proyecto
+## Estructura del Proyecto
 
 ```
 src/
-├── components/
-│   ├── CharacterGrid.tsx      # Grid de personajes
-│   ├── CharacterModal.tsx     # Modal de detalle
-│   ├── ErrorMessage.tsx       # Mensajes de error
-│   ├── Filters.tsx            # Filtros avanzados
-│   ├── Loader.tsx             # Indicador de carga
-│   ├── Pagination.tsx         # Navegación de páginas
-│   ├── ResultsInfo.tsx        # Información de resultados
-│   ├── SearchBar.tsx          # Barra de búsqueda
-│   └── SearchHistory.tsx      # Historial de búsquedas
+├── components/           # Componentes React (carpeta por componente)
+│   ├── CharacterGrid/   # Grid de visualización de personajes
+│   ├── CharacterModal/  # Modal de detalle de personaje
+│   ├── CustomSelect/    # Componente select personalizado con búsqueda
+│   ├── ErrorMessage/    # Componente de visualización de errores
+│   ├── Filters/         # Filtros avanzados
+│   ├── Icons/           # Componentes de iconos SVG personalizados
+│   ├── LazyImage/       # Componente de carga lazy de imágenes
+│   ├── Loader/          # Indicador de carga
+│   ├── Pagination/      # Navegación de páginas
+│   ├── ResultsInfo/     # Contador de resultados
+│   ├── SearchBar/       # Barra de búsqueda
+│   ├── SearchHistory/   # Visualización de historial de búsquedas
+│   ├── SkeletonCard/    # Skeleton de carga
+│   └── ThemeToggle/     # Toggle de modo oscuro
+├── constants/
+│   └── filters.ts       # Constantes de opciones de filtros
+├── hooks/
+│   ├── useCharacters.ts    # Lógica de obtención de personajes
+│   ├── useDarkMode.ts      # Gestión de estado de modo oscuro
+│   ├── useDebounce.ts      # Hook de utilidad para debounce
+│   └── useSearchHistory.ts # Gestión de historial de búsquedas
 ├── services/
-│   └── rickAndMortyApi.ts     # Servicio de API
+│   └── rickAndMortyApi.ts  # Capa de servicio de API
 ├── types/
-│   └── rickAndMorty.ts        # Tipos TypeScript
-├── App.tsx                     # Componente principal
-├── App.css                     # Estilos principales
-├── main.tsx                    # Punto de entrada
-└── index.css                   # Estilos globales
+│   └── rickAndMorty.ts     # Definiciones de tipos TypeScript
+├── utils/
+│   └── statusHelpers.ts    # Helpers de color/texto de estado
+├── App.tsx              # Componente principal de la aplicación
+├── App.css              # Estilos principales con variables CSS
+├── main.tsx             # Punto de entrada de la aplicación
+└── index.css            # Estilos globales y resets
 ```
 
-## 🌐 API Utilizada
+## API Utilizada
 
 **Rick and Morty API**
 - Documentación: https://rickandmortyapi.com/documentation
 - Endpoint base: `https://rickandmortyapi.com/api`
-- Recursos utilizados: `/character` con filtros y paginación
+- Recursos utilizados: `/character` con soporte de filtrado y paginación
 
-## 👨‍💻 Buenas Prácticas Implementadas
+## Buenas Prácticas Implementadas
 
-- ✅ Componentes funcionales con hooks
-- ✅ TypeScript para tipado estático
-- ✅ Separación de responsabilidades
-- ✅ Manejo de errores robusto
-- ✅ Código limpio y legible
-- ✅ Nombres descriptivos
-- ✅ Accesibilidad (ARIA labels)
-- ✅ Responsive design
-- ✅ Optimización de renders
-- ✅ Validación de inputs
+- ✅ Componentes funcionales con hooks de React
+- ✅ TypeScript para tipado estático y mejor soporte del IDE
+- ✅ Separación de responsabilidades (components, hooks, services, utils)
+- ✅ Custom hooks para lógica reutilizable
+- ✅ Estructura de carpeta-por-componente con barrel exports
+- ✅ Manejo robusto de errores
+- ✅ Código limpio y legible con nombres descriptivos
+- ✅ Accesibilidad (etiquetas ARIA, navegación por teclado)
+- ✅ Diseño responsive con enfoque mobile-first
+- ✅ Variables CSS para theming
+- ✅ Renderizado optimizado con useCallback y useMemo
+- ✅ Validación y sanitización de inputs
+- ✅ Estados de carga y skeleton screens
+- ✅ localStorage para persistencia de datos
 
-## 📝 Notas de Desarrollo
+## Notas de Desarrollo
 
-- Se utilizó Vite por su velocidad y configuración mínima
-- TypeScript para mayor seguridad y autocompletado
-- CSS puro sin frameworks para demostrar conocimientos fundamentales
-- Componentes reutilizables y modulares
-- Estado local con hooks de React (useState, useEffect)
-- LocalStorage para persistencia del historial
-
-## 🚀 Mejoras Futuras Posibles
-
-- Implementar React Query para caché de datos
-- Agregar tests unitarios y de integración
-- Modo oscuro
-- Búsqueda con debounce automático
-- Favoritos persistentes
-- Compartir personajes en redes sociales
-- Filtros por episodio y ubicación
-
-## 📄 Licencia
-
-Este proyecto fue desarrollado como prueba técnica y es de uso libre para fines educativos.
+- Se eligió Vite por su velocidad y configuración mínima
+- TypeScript proporciona seguridad de tipos y mejor experiencia de desarrollo
+- CSS puro con características modernas (custom properties, grid, flexbox)
+- Arquitectura de componentes modular y reutilizable
+- Convención de nombres CSS inspirada en BEM
+- Iconos SVG personalizados en lugar de librerías para mejor rendimiento
+- Carga lazy de imágenes para rendimiento mejorado
 
 ---
 
-Desarrollado con ❤️ usando React y TypeScript
+Desarrollado con React y TypeScript

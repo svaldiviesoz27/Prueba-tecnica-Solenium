@@ -1,4 +1,4 @@
-import { SunIcon, MoonIcon } from './Icons'
+import { SunIcon, MoonIcon } from '../Icons/Icons'
 
 interface ThemeToggleProps {
     isDark: boolean

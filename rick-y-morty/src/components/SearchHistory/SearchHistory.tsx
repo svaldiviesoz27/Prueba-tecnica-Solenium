@@ -1,4 +1,4 @@
-import { ClockIcon, XIcon } from './Icons'
+import { ClockIcon, XIcon } from '../Icons/Icons'
 
 interface SearchHistoryProps {
     items: string[]
