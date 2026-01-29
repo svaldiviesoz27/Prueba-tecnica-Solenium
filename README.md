@@ -49,28 +49,23 @@ Clonar el repositorio:
 
 ```bash
 git clone https://github.com/svaldiviesoz27/Prueba-tecnica-Solenium
-```bash
 
 Ingresar a la carpeta del proyecto:
 
 ```bash
 cd rick-y-morty
-```bash
 
 Instalar dependencias:
 
 ```bash
 npm install
-```bash
 
 Ejecutar el proyecto en modo desarrollador 
 
 ```bash
 npm run dev
-```bash
 
 Abrir la aplicación en la ruta indicada por la consola, normalmente será:
 
 ```bash
 http://localhost:5173
-```bash
