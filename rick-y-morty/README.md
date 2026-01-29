@@ -60,6 +60,59 @@ npm run preview
 npm run lint
 ```
 
+## Ejecución con Docker
+
+### Prerrequisitos para Docker
+
+- Docker instalado (versión 20.10 o superior)
+- Docker Compose instalado (versión 2.0 o superior)
+
+### Opción 1: Desarrollo con Docker Compose
+
+```bash
+# Iniciar en modo desarrollo (con hot reload)
+docker-compose up dev
+
+# La aplicación estará disponible en http://localhost:5173
+```
+
+### Opción 2: Producción con Docker Compose
+
+```bash
+# Construir y ejecutar en modo producción
+docker-compose up prod
+
+# La aplicación estará disponible en http://localhost:8080
+```
+
+### Opción 3: Docker sin Compose
+
+```bash
+# Construir la imagen
+docker build -t rick-morty-app .
+
+# Ejecutar el contenedor
+docker run -p 8080:80 rick-morty-app
+
+# La aplicación estará disponible en http://localhost:8080
+```
+
+### Comandos Docker Útiles
+
+```bash
+# Detener los contenedores
+docker-compose down
+
+# Reconstruir las imágenes
+docker-compose build
+
+# Ver logs
+docker-compose logs -f
+
+# Ejecutar en segundo plano
+docker-compose up -d prod
+```
+
 ## Características
 
 - **Búsqueda de Personajes** - Busca personajes por nombre con resultados en tiempo real
